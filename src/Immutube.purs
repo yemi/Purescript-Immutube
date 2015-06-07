@@ -14,8 +14,6 @@ import Data.Either
 import Data.Maybe
 import Data.Traversable
 
-import Debug.Trace
-
 import Rx.Observable
 import Rx.JQuery
 
