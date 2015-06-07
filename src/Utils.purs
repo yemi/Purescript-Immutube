@@ -3,6 +3,7 @@ module Utils where
 import DOM
 
 import Data.DOM.Simple.Types
+import Data.Maybe
 
 import Control.Monad.Eff
 import Control.Monad.JQuery (JQuery(), JQueryEvent())
@@ -29,3 +30,7 @@ foreign import fromEvent
     }
   }
   """ :: forall eff a. String -> JQuery -> Eff (dom :: DOM | eff) (Observable JQueryEvent)
+
+fromEmpty :: String -> Maybe String
+fromEmpty "" = Nothing
+fromEmpty str = Just str

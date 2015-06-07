@@ -32,7 +32,6 @@ import qualified Immutube.Player as P
 
 import Utils
 
-
 apiKey :: String
 apiKey = "AIzaSyAWoa7aqds2Cx_drrrb5FPsRObFa7Dxkfg"
 
@@ -66,23 +65,18 @@ clickStream :: forall eff. J.JQuery -> Eff (dom :: DOM | eff) (Observable HTMLEl
 clickStream = (unwrap <<< (<$>) target) <=< fromEvent "click"
 
 youtubeId :: forall eff. HTMLElement -> Eff (dom :: DOM | eff) (Maybe String)
-youtubeId el = do
-  id <- getAttribute "data-youtubeid" el
-  case id of
-       "" -> pure $ Nothing
-       id' -> pure $ Just id'
+youtubeId = (return <<< fromEmpty) <=< getAttribute "data-youtubeid"
 
 main = do
-
+  results <- J.select "#results"
   urls <- urlStream =<< J.select "#search"
+  clicks <- clickStream results
+
   subscribe urls $ \term -> launchAff $ do
     items <- search term
+    liftEff $ J.clear results
+    liftEff $ traverse_ (flip J.append results) items
 
-    let results = J.select "#results"
-    liftEff $ J.clear =<< results
-    liftEff $ foldl (\acc curr -> acc >>= J.append curr) results items
-
-  clicks <- clickStream =<< J.select "#results"
   subscribe clicks $ \el -> do
     document' <- document globalWindow
     Just player <- querySelector "#player" document'
