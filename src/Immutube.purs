@@ -13,8 +13,6 @@ import Data.Foldable
 import Data.Either
 import Data.Maybe
 import Data.Traversable
-import Data.Array (last)
-import Data.String (split)
 
 import Debug.Trace
 
