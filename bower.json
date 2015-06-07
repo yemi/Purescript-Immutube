@@ -1,0 +1,27 @@
+{
+  "name": "purescript-immutube",
+  "version": "0.0.0",
+  "authors": [
+    "Fabian Rios <rocaboca@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "purescript-rx": "~0.6.0",
+    "purescript-jquery": "~0.4.0",
+    "rxjs": "~2.5.2",
+    "purescript-simple-dom": "~0.0.2",
+    "purescript-debug-foreign": "~0.0.4",
+    "jquery": "~2.1.4",
+    "purescript-aff": "~0.10.1",
+    "purescript-affjax": "~0.2.1",
+    "purescript-argonaut": "~0.5.0",
+    "purescript-foreign": "~0.4.2"
+  }
+}
