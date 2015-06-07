@@ -89,6 +89,13 @@ target :: forall eff. JQueryEvent -> Eff (dom :: DOM | eff) HTMLElement
 ```
 
 
+#### `fromEvent`
+
+``` purescript
+fromEvent :: forall eff a. String -> JQuery -> Eff (dom :: DOM | eff) (Observable JQueryEvent)
+```
+
+
 
 ## Module Immutube.Player
 
