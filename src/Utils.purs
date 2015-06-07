@@ -34,3 +34,4 @@ foreign import fromEvent
 fromEmpty :: String -> Maybe String
 fromEmpty "" = Nothing
 fromEmpty str = Just str
+

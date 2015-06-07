@@ -71,16 +71,13 @@ main = do
   results <- J.select "#results"
   urls <- urlStream =<< J.select "#search"
   clicks <- clickStream results
+  document' <- document globalWindow
+  Just player <- querySelector "#player" document'
 
-  subscribe urls $ \term -> launchAff $ do
+  subscribe urls \term -> launchAff $ do
     items <- search term
     liftEff $ J.clear results
     liftEff $ traverse_ (flip J.append results) items
 
-  subscribe clicks $ \el -> do
-    document' <- document globalWindow
-    Just player <- querySelector "#player" document'
-    id <- youtubeId el
-
-    maybe (pure unit) (flip setInnerHTML player <<< P.create) id
+  subscribe clicks $ traverse_ (flip setInnerHTML player <<< P.create) <=< youtubeId
 
